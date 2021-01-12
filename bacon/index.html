@@ -1,0 +1,56 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<title>培根密码加解密</title>
+	</head>
+	<body>
+		<h1>培根密码加解密</h1>
+		<textarea id="text1" cols="50" rows="20" onclick="clean()">请在此输入您要加密的字符串或需解密的密文</textarea>
+		<br>
+		<button type="button" onclick="jiemi()">解密</button><button type="button" onclick="jiami()">加密</button>
+		<script>
+			var dic={'aaaaa':'A','aaaab':'B','aaaba':'C','aaabb':'D','aabaa':'E','aabab':'F','aabba':'G','aabbb':'H','abaaa':'I','abaab':'J','ababa':'K','ababb':'L','abbaa':'M','abbab':'N','abbba':'O','abbbb':'P','baaaa':'Q','baaab':'R','baaba':'S','baabb':'T','babaa':'U','babab':'V','babba':'W','babbb':'X','bbaaa':'Y','bbaab':'Z'}
+	
+			function jiemi()
+			{
+				var str=document.getElementById("text1").value.toLocaleLowerCase();
+				var ans=new String;
+				for(var i=0;i<str.length;i+=5)
+				{
+					ans+=dic[str.slice(i,i+5)]
+				}
+				ans+='\n'+ans.toLocaleLowerCase();
+				document.getElementById("text1").value=ans;
+			}
+			
+			function jiami()
+			{
+				var str=document.getElementById("text1").value.toLocaleUpperCase();
+				var ans=new String
+				for (var i=0;i<str.length;i++)
+				{
+					ans+=findKey(str[i]);
+				}
+				ans+='\n'+ans.toUpperCase();
+				document.getElementById("text1").value=ans;			
+			}
+			
+			function findKey(val)
+			{
+				for (i in dic)
+					if(dic[i]==val)
+						return i;
+			}
+			
+			var a=1;
+			function clean()
+			{
+				
+				if (a==1)
+					document.getElementById("text1").value="";
+				a=0;
+			}
+		</script>
+		
+	
+
+</body></html>
