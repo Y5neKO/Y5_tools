@@ -23,6 +23,9 @@
             <a href="./brainfuck"><button class="btn-5">brainfuck/Ook!加解密</button></a>
             <a href="./jsfuck"><button class="btn-1">jsfuck加解密</button></a>
             <a href="./base64_image"><button class="btn-2">base64转图片</button></a>
+            <a href="./NTLM"><button class="btn-3">NTLM加密计算器</button></a>
+            <a href="./enigma"><button class="btn-4">Enigma加解密</button></a>
+            <a href="./get_AV"><button class="btn-5">Windows杀软进程分析</button></a>
             <br>
             <br>
             <a>待添加</a><br>

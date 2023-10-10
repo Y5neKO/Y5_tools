@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Enigma Cipher</title>
+<!-- Global CSS -->
+<link rel="stylesheet" href="./files/font-awesome.css">
+<link rel="stylesheet" href="./files/font-opensans.css">
+<link rel="stylesheet" href="./files/font-droidsans.css">
+<link rel="stylesheet" href="./files/bootstrap.min.css">
+<link rel="stylesheet" href="./files/bootstrap-callout.css">
+<link rel="stylesheet" href="./files/shCore.css">
+<link rel="stylesheet" href="./files/shThemeRDark.css">
+<link rel="stylesheet" href="./files/main.css">
+<link rel="stylesheet" href="./files/media-queries.css">
+<link rel="stylesheet" href="./files/custom_file_input.css">
+<!-- End Global CSS -->
+<!-- JQuery --> 
+<script type="text/javascript" src="./files/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script type="text/javascript" src="./files/bootstrap.min.js"></script></head>
+<body>
+
+<div class="container wrapper">
+    <div class="row title">
+        <h3 class="text-center">Enigma Cipher</h3>
+    </div>
+    <form onsubmit="javascript:return false">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">Key</div> <input type="text" class="form-control" id="ekey" placeholder="Key" value="ABC">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">Ring</div> <input type="text" class="form-control" id="ering" placeholder="Ring" value="ABC">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">Rotors</div> <input type="text" class="form-control" id="erotors" placeholder="Rotors" value="123">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">Reflector</div> 
+                            <select class="form-control" id="ereflector" placeholder="Reflector">
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="BThin">BThin</option>
+                                <option value="CThin">CThin</option>
+                            </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">Plugboard</div> <input type="text" class="form-control" id="eplug" placeholder="Plugboard" value="PO ML IU KJ NH YT GB VF RE DC">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <textarea class="form-control" rows="8" id="encode" placeholder="需要编码的内容"></textarea>
+                <div class="clearfix visible-xs-block"></div>
+                <button class="btn btn-info" onclick="enigma_en()">Encode</button>
+                <button class="btn btn-info copy" data-clipboard-target="#encode" data-container="body" data-toggle="popover" data-placement="bottom" data-content="复制成功">Copy</button>
+                <button class="btn btn-info" onclick="lower(&#39;#encode&#39;)">小写</button>
+                <button class="btn btn-info" onclick="upper(&#39;#encode&#39;)">大写</button>
+                <button class="btn btn-danger clear" data-clear-target="#encode">Clear</button>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <textarea class="form-control" rows="8" id="decode" placeholder="需要解码的内容"></textarea>
+                <div class="clearfix visible-xs-block"></div>
+                <button class="btn btn-info" onclick="enigma_de()">Decode</button>
+                <button class="btn btn-info copy" data-clipboard-target="#decode" data-container="body" data-toggle="popover" data-placement="bottom" data-content="复制成功">Copy</button>
+                <button class="btn btn-info" onclick="lower(&#39;#decode&#39;)">小写</button>
+                <button class="btn btn-info" onclick="upper(&#39;#decode&#39;)">大写</button>
+                <button class="btn btn-danger clear" data-clear-target="#decode">Clear</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+<div class="container wrapper">
+    <div class="bs-callout bs-callout-default">
+        <h4>Python代码参考</h4>
+    </div>
+    <div><div id="highlighter_638037" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">from</code> <code class="python plain">pycipher </code><code class="python keyword">import</code> <code class="python plain">Enigma</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="python functions">print</code> <code class="python plain">Enigma(settings</code><code class="python keyword">=</code><code class="python plain">(</code><code class="python string">'A'</code><code class="python plain">,</code><code class="python string">'B'</code><code class="python plain">,</code><code class="python string">'C'</code><code class="python plain">),rotors</code><code class="python keyword">=</code><code class="python plain">(</code><code class="python value">1</code><code class="python plain">,</code><code class="python value">2</code><code class="python plain">,</code><code class="python value">3</code><code class="python plain">),reflector</code><code class="python keyword">=</code><code class="python string">'B'</code><code class="python plain">,</code></div><div class="line number4 index3 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">ringstellung</code><code class="python keyword">=</code><code class="python plain">(</code><code class="python string">'A'</code><code class="python plain">,</code><code class="python string">'B'</code><code class="python plain">,</code><code class="python string">'C'</code><code class="python plain">),steckers</code><code class="python keyword">=</code><code class="python plain">[(</code><code class="python string">'P'</code><code class="python plain">,</code><code class="python string">'O'</code><code class="python plain">),(</code><code class="python string">'M'</code><code class="python plain">,</code><code class="python string">'L'</code><code class="python plain">),</code></div><div class="line number5 index4 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">(</code><code class="python string">'I'</code><code class="python plain">,</code><code class="python string">'U'</code><code class="python plain">),(</code><code class="python string">'K'</code><code class="python plain">,</code><code class="python string">'J'</code><code class="python plain">),(</code><code class="python string">'N'</code><code class="python plain">,</code><code class="python string">'H'</code><code class="python plain">),(</code><code class="python string">'Y'</code><code class="python plain">,</code><code class="python string">'T'</code><code class="python plain">),(</code><code class="python string">'G'</code><code class="python plain">,</code><code class="python string">'B'</code><code class="python plain">),(</code><code class="python string">'V'</code><code class="python plain">,</code><code class="python string">'F'</code><code class="python plain">),</code></div><div class="line number6 index5 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">(</code><code class="python string">'R'</code><code class="python plain">,</code><code class="python string">'E'</code><code class="python plain">),(</code><code class="python string">'D'</code><code class="python plain">,</code><code class="python string">'C'</code><code class="python plain">)]).encipher(</code><code class="python string">'HELLOWORLD'</code><code class="python plain">)&nbsp;&nbsp;&nbsp;&nbsp; </code></div><div class="line number7 index6 alt2">&nbsp;</div><div class="line number8 index7 alt1"><code class="python functions">print</code> <code class="python plain">Enigma(settings</code><code class="python keyword">=</code><code class="python plain">(</code><code class="python string">'A'</code><code class="python plain">,</code><code class="python string">'B'</code><code class="python plain">,</code><code class="python string">'C'</code><code class="python plain">),rotors</code><code class="python keyword">=</code><code class="python plain">(</code><code class="python value">1</code><code class="python plain">,</code><code class="python value">2</code><code class="python plain">,</code><code class="python value">3</code><code class="python plain">),reflector</code><code class="python keyword">=</code><code class="python string">'B'</code><code class="python plain">,</code></div><div class="line number9 index8 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">ringstellung</code><code class="python keyword">=</code><code class="python plain">(</code><code class="python string">'A'</code><code class="python plain">,</code><code class="python string">'B'</code><code class="python plain">,</code><code class="python string">'C'</code><code class="python plain">),steckers</code><code class="python keyword">=</code><code class="python plain">[(</code><code class="python string">'P'</code><code class="python plain">,</code><code class="python string">'O'</code><code class="python plain">),(</code><code class="python string">'M'</code><code class="python plain">,</code><code class="python string">'L'</code><code class="python plain">),</code></div><div class="line number10 index9 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">(</code><code class="python string">'I'</code><code class="python plain">,</code><code class="python string">'U'</code><code class="python plain">),(</code><code class="python string">'K'</code><code class="python plain">,</code><code class="python string">'J'</code><code class="python plain">),(</code><code class="python string">'N'</code><code class="python plain">,</code><code class="python string">'H'</code><code class="python plain">),(</code><code class="python string">'Y'</code><code class="python plain">,</code><code class="python string">'T'</code><code class="python plain">),(</code><code class="python string">'G'</code><code class="python plain">,</code><code class="python string">'B'</code><code class="python plain">),(</code><code class="python string">'V'</code><code class="python plain">,</code><code class="python string">'F'</code><code class="python plain">),</code></div><div class="line number11 index10 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">(</code><code class="python string">'R'</code><code class="python plain">,</code><code class="python string">'E'</code><code class="python plain">),(</code><code class="python string">'D'</code><code class="python plain">,</code><code class="python string">'C'</code><code class="python plain">)]).decipher(</code><code class="python string">'TDJPKAUTPR'</code><code class="python plain">)</code></div></div></td></tr></tbody></table></div></div>
+</div>
+
+<!-- Global Javascript -->
+<script type="text/javascript" src="./files/bootstrap-hover-dropdown.min.js"></script>
+<!-- Syntaxhighlighter -->
+<script type="text/javascript" src="./files/shCore.js"></script>
+<script type="text/javascript" src="./files/shBrushPython.js"></script>
+<!-- main -->
+<script type="text/javascript" src="./files/main.js"></script>
+<script type="text/javascript" src="./files/clipboard.min.js"></script>
+<script type="text/javascript" src="./files/jquery.custom-file-input.js"></script> 
+<!-- End Global Javascript -->
+
+<!-- Flat-UI -->
+<link rel="stylesheet" href="./files/flat-ui.min.css">
+<script src="./files/flat-ui.min.js"></script>
+<script src="./files/application.js"></script>
+<!-- End Flat-UI -->
+
+<script src="./files/enigma.js"></script>
+<script>
+function enigma_en(){
+    var plaint = $('#encode').val();
+    var keysettings = $('#ekey').val();
+    var ringsettings = $('#ering').val();
+    var plugboardsettings = $('#eplug').val();
+    var rotorsettings = $('#erotors').val();
+    var reflector = $('#ereflector').val();
+    $('#decode').val(enigma_encode(plaint, keysettings, ringsettings, plugboardsettings, rotorsettings, reflector));
+}
+
+function enigma_de(){
+    var cipher = $('#decode').val();
+    var keysettings = $('#ekey').val();
+    var ringsettings = $('#ering').val();
+    var plugboardsettings = $('#eplug').val();
+    var rotorsettings = $('#erotors').val();
+    var reflector = $('#ereflector').val();
+    $('#encode').val(enigma_encode(cipher, keysettings, ringsettings, plugboardsettings, rotorsettings, reflector));
+}
+</script>
+
+<script type="text/javascript">
+    SyntaxHighlighter.defaults['toolbar'] = false;
+    SyntaxHighlighter.all();
+</script>
+
+</body></html>
